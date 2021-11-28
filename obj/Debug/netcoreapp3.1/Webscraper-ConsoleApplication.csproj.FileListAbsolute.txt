@@ -1,0 +1,16 @@
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.exe
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.deps.json
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.runtimeconfig.json
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.runtimeconfig.dev.json
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.dll
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.pdb
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.AssemblyInfoInputs.cache
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.AssemblyInfo.cs
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.csproj.CoreCompileInputs.cache
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.dll
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.pdb
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.genruntimeconfig.cache
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\bin\Debug\netcoreapp3.1\WebDriver.dll
+C:\thomas more\DevOps & Security\case study\Webscraper-ConsoleApplication\obj\Debug\netcoreapp3.1\Webscraper-ConsoleApplication.csproj.AssemblyReference.cache

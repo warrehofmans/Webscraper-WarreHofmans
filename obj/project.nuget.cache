@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "zKk3n6p3S+Bw6RMjP9VUBwiGhx0OeadPqk3o1xHs0GKHhXB/ULtqyfGPB0bOVqEn0LrBGWQaR56hmJJxoVsEIA==",
+  "success": true,
+  "projectFilePath": "C:\\thomas more\\DevOps & Security\\case study\\Webscraper-ConsoleApplication\\Webscraper-ConsoleApplication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\warre\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\selenium.chrome.webdriver\\85.0.0\\selenium.chrome.webdriver.85.0.0.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
