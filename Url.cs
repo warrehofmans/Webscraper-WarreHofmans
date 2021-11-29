@@ -19,7 +19,19 @@ namespace Webscraper_ConsoleApplication
 
         public string youtubeSearch(string term)
         {
-            return youtube + term;
+            var filterTime = "&sp=CAI%253D";
+            return youtube + term + filterTime;
+        }
+
+        public static void printVideo(string title, string views, string date, string vidUrl, string uploader, int count)
+        {
+            Console.WriteLine("******* Video " + count + " *******");
+            Console.WriteLine("Video Title: " + title);
+            Console.WriteLine("Video Views: " + views);
+            Console.WriteLine("Video Release Date: " + date);
+            Console.WriteLine("Video URL: " + vidUrl);
+            Console.WriteLine("Uploader: " + uploader);
+            Console.WriteLine("\n");
         }
     }
 }

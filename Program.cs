@@ -18,6 +18,7 @@ namespace Webscraper_ConsoleApplication
               Console.WriteLine("Search?");
               var src = url.youtubeSearch(Console.ReadLine());
                 scraper.setUrl(src);
+                scraper.scrapeYoutube(src);
 
             }
 
