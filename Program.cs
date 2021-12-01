@@ -7,20 +7,25 @@ namespace Webscraper_ConsoleApplication
     {
         static void Main(string[] args)
         {
+
             Scraper scraper = new Scraper();
-            Url url = new Url();
-            Print.StartScreen();
-
-            var choice = Console.ReadLine();
-
-            if( choice.ToLower() == "1")
+            while (true)
             {
-              Console.WriteLine("Search?");
-              var src = url.youtubeSearch(Console.ReadLine());
-                scraper.setUrl(src);
-                scraper.scrapeYoutube(src);
+                Print.StartScreen();
 
+                var choice = Console.ReadLine();
+
+                if (choice.ToLower() == "1")
+                {
+
+                    Console.WriteLine("Search?");
+                    string searchTerm = Console.ReadLine();
+                    Youtube youtube = new Youtube(searchTerm);
+                    youtube.scrapeYoutube();
+
+                }
             }
+            
 
             
             
