@@ -17,14 +17,24 @@ namespace Webscraper_ConsoleApplication
         }
 
 
-        public static void printVideo(YoutubeVideo video)
+        public static void printVideo(YoutubeVideo video, int count)
         {
-            Console.WriteLine("******* Video " + video.number + " *******");
+            Console.WriteLine("******* Video " + count + " *******");
             Console.WriteLine("Video Title: " + video.title);
             Console.WriteLine("Video Views: " + video.views);
             Console.WriteLine("Video Release Date: " + video.date);
             Console.WriteLine("Video URL: " + video.url);
             Console.WriteLine("Uploader: " + video.uploader);
+            Console.WriteLine("\n");
+        } 
+        
+        public static void printJob(JobAdv job, int count)
+        {
+            Console.WriteLine("******* Job " + count + " *******");
+            Console.WriteLine("Job Title: " + job.title);
+            Console.WriteLine("Job Company: " + job.company);
+            Console.WriteLine("Job Location: " + job.location);
+            Console.WriteLine("Job URL: " + job.url);
             Console.WriteLine("\n");
         }
 

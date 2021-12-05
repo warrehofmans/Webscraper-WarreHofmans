@@ -1,12 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "zKk3n6p3S+Bw6RMjP9VUBwiGhx0OeadPqk3o1xHs0GKHhXB/ULtqyfGPB0bOVqEn0LrBGWQaR56hmJJxoVsEIA==",
+  "dgSpecHash": "E9GFsHqQjNMwtH49sJdxVFoVV7pYRn3ylvEXwmv+fTdYIcvFu4X6ZzFsgoqaupupE/i3JnoAQ+L2otp+wHittg==",
   "success": true,
   "projectFilePath": "C:\\thomas more\\DevOps & Security\\case study\\Webscraper-ConsoleApplication\\Webscraper-ConsoleApplication.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\warre\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\dotnetseleniumextras.waithelpers\\3.11.0\\dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\microsoft.data.sqlite\\5.0.12\\microsoft.data.sqlite.5.0.12.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.12\\microsoft.data.sqlite.core.5.0.12.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\selenium.chrome.webdriver\\85.0.0\\selenium.chrome.webdriver.85.0.0.nupkg.sha512",
-    "C:\\Users\\warre\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512"
+    "C:\\Users\\warre\\.nuget\\packages\\selenium.support\\4.1.0\\selenium.support.4.1.0.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.4\\sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

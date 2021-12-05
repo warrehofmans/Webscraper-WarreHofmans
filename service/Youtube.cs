@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Webscraper_ConsoleApplication.DAL;
 
 namespace Webscraper_ConsoleApplication
 {
@@ -11,14 +12,14 @@ namespace Webscraper_ConsoleApplication
     {
         private ReadOnlyCollection<IWebElement> videos;
         public static int amountVideos = 5;
-        private readonly string url = "https://www.youtube.com/results?search_query=";
-        private readonly string filter = "&sp=CAI%253D";
-        public string searchTerm;
-
+        private  YoutubeVideoRepository youtubeVideoRepository = new YoutubeVideoRepository();
+        
         public Youtube(string searchTerm)
         {
             this.searchTerm = searchTerm;
-        }
+            this.url = "https://www.youtube.com/results?search_query=";
+            this.filter = "&sp=CAI%253D";
+            }
 
         public void scrapeYoutube()
         {
@@ -30,7 +31,7 @@ namespace Webscraper_ConsoleApplication
             videos = collectVideos();
 
             //check if there are results
-            if (!checkResultEmpty()) { Print.printNoResults(); }
+            if (!checkResultEmpty(videos)) { Print.printNoResults(); }
             
 
             //loop over results
@@ -50,16 +51,16 @@ namespace Webscraper_ConsoleApplication
                 //print object
                 YoutubeVideo youtubeVideo = new YoutubeVideo
                 {
+                    title = getTitle(video),
+                    url = getUrl(video),
+                    uploader = getUploader(video),
+                    views = getViews(video),
+                    date = getDate(video)
 
-                    title = this.getTitle(video),
-                    url = this.getUrl(video),
-                    uploader = this.getUploader(video),
-                    views = this.getViews(video),
-                    date = this.getDate(video),
-                    number = helpCounter+1
                 };
 
-                Print.printVideo(youtubeVideo);
+                Print.printVideo(youtubeVideo, helpCounter + 1);
+               youtubeVideoRepository.InsertYoutubeVideo(youtubeVideo);
 
                 helpCounter++;
             }
@@ -85,8 +86,8 @@ namespace Webscraper_ConsoleApplication
 
         private ReadOnlyCollection<IWebElement> collectVideosPage()
         {
-            By elem_video_link = By.CssSelector("ytd-video-renderer");
-            return driver.FindElements(elem_video_link);
+            By element = By.CssSelector("ytd-video-renderer");
+            return driver.FindElements(element);
         }
 
         private string getTitle(IWebElement video)
@@ -130,16 +131,6 @@ namespace Webscraper_ConsoleApplication
             {
                 return false;
             }
-        }
-
-        private string makeUrl()
-        {
-            return url + searchTerm + filter;
-        }
-
-        private bool checkResultEmpty()
-        {
-            return videos.Count > 0;
         }
 
         private bool checkResult()
