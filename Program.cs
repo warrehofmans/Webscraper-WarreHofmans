@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.views;
 
 namespace Webscraper_ConsoleApplication
 {
@@ -44,31 +46,91 @@ namespace Webscraper_ConsoleApplication
                 if (choice.ToLower() == "3")
                 {
 
-                    Console.WriteLine("All videos:");
-                    var testcount = 1;
-                    foreach(YoutubeVideo video in youtubeVideoRepository.GetYoutubeVideos())
+                    var videoList = youtubeVideoRepository.GetYoutubeVideos();
+
+                    if(videoList.Count() == 0)
                     {
-                        Print.printVideo(video, testcount);
-                        testcount++;
+                        VideoOverview.NoVideosFound();
                     }
-                   ;
+                    else
+                    {
+                        VideoOverview.Header(videoList.Count());
+                        foreach (YoutubeVideo video in videoList)
+                        {
+                            VideoOverview.printVideo(video);
 
+                        }
+
+                        VideoOverview.printVideoOverview();
+                        var id = Console.ReadLine();
+
+                        if (id == "a")
+                        {
+                            youtubeVideoRepository.ResetYoutubeDb();
+                        }
+                        while (id != "q" && id != "a")
+                        {
+                            if(int.TryParse(id, out _) && id != null)
+                            {
+                                youtubeVideoRepository.DeleteVideo(new YoutubeVideo { id = Int32.Parse(id) });
+                                Print.clearPrevLine();
+                            }
+
+                            else
+                            {
+                                Print.wrongFormat();
+                                
+                            }
+                            id = Console.ReadLine();
+                        }
+                    }
                 }
-
 
                 if (choice.ToLower() == "4")
                 {
 
-                    Console.WriteLine("All jobs:");
-                    var testcount = 1;
-                    foreach (JobAdv job in jobAdvRepository.GetJobAdvs())
-                    {
-                        Print.printJob(job, testcount);
-                        testcount++;
-                    }
-                   ;
+                    var jobList = jobAdvRepository.GetJobAdvs();
 
+                    if (jobList.Count() == 0) { JobOverview.NoJobsFound(); }
+                    else
+                    {
+                        JobOverview.Header(jobList.Count());
+
+                        foreach (JobAdv job in jobList)
+                        {
+                            JobOverview.printJob(job);
+                        }
+
+                        JobOverview.printJobOverview();
+                        var id = Console.ReadLine();
+
+                        if (id == "a")
+                        {
+                            jobAdvRepository.ResetJobDb();
+                        }
+                        if (id != "q" && id != "a")
+                        {
+                            jobAdvRepository.DeleteJob(new JobAdv { id = Int32.Parse(id) });
+
+                        }
+                    }
                 }
+
+                if (choice.ToLower() == "reset youtube")
+                {
+
+                    Console.WriteLine("Reset youtube!");
+                    youtubeVideoRepository.ResetYoutubeDb();
+                }
+
+                if (choice.ToLower() == "reset")
+                {
+
+                    Console.WriteLine("Hard reset!");
+                    SqlLiteBaseRepository.dbHardReset();
+ 
+                }
+
             }
             
 

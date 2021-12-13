@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Webscraper_ConsoleApplication
 {
-    class JobAdv
-    {
+    class JobAdv { 
+
+
+        public int id { get; set; }
         public string title { get; set; }
         public string company { get; set; }
         public string location { get; set; }

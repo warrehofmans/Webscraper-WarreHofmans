@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.views;
 
 namespace Webscraper_ConsoleApplication
 {
@@ -32,25 +34,29 @@ namespace Webscraper_ConsoleApplication
 
         private void collectJobs()
         {
-            var count = 1;
-            scrollPage();
+            
+            waitLoaded();
             var jobs = collectJobsPage();
             if(!checkResultEmpty(jobs)) {
                 Print.printNoResults();
                 return;
                 }
             saveJobs(jobs);
+            scrollPage();
+           
             while (checkNext())
             {
                 next();
-                if (count == 1)
+                waitLoaded();
+                
+                if (checkPopUp())
                 {
                     closePopUP();
                 }
-                scrollPage();
+                
                 jobs = collectJobsPage();
                 saveJobs(jobs);
-                count++;
+                scrollPage();
             }
         }
 
@@ -66,7 +72,7 @@ namespace Webscraper_ConsoleApplication
                     url = getLink(job)
                 };
 
-                Print.printJob(jobAdv, jobCount);
+                JobOverview.printJob(jobAdv, jobCount);
                 jobAdvRepository.InsertJobAdv(jobAdv);
                 jobCount++;
             }
@@ -79,6 +85,7 @@ namespace Webscraper_ConsoleApplication
 
         private string getTitle(IWebElement job)
         {
+            
             IWebElement element = job.FindElement(By.CssSelector(".jobTitle span:nth-child(2)"));
             return element.Text;
         }
@@ -104,23 +111,43 @@ namespace Webscraper_ConsoleApplication
 
         private  void closePopUP()
         {
-            var element = FindElement(By.Id("popover-x"));
+            var element = FindElementClick(By.Id("popover-x"));
             element.Click();
    
+        }
+
+        private bool checkPopUp()
+        {
+            try
+            {
+                FindElementClick(By.Id("popover-x"));
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         private void next()
         {
             By next = By.CssSelector("[aria-label='Volgende']");
-            var element = FindElement(next);
+            var element = FindElementClick(next);
+
+      /*      Actions actions = new Actions(driver);
+            actions.MoveToElement(element);
+            actions.Perform();*/
+
+
             element.Click();
+           
         }
 
         private bool checkNext()
         {
             try
             {
-                FindElement(By.CssSelector("[aria-label='Volgende']"));
+                FindElementClick(By.CssSelector("[aria-label='Volgende']"));
                 return true;
             }
                 catch(Exception e)

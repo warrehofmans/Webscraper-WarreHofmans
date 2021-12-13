@@ -44,11 +44,11 @@ namespace Webscraper_ConsoleApplication
         public void scrollPage()
         {
                 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, document.documentElement.scrollHeight);");
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
 
         }
 
-        public void scrollBottom()
+   /*     public void scrollBottom()
         {
 
             var last_height = (((IJavaScriptExecutor)driver).ExecuteScript("return document.documentElement.scrollHeight"));
@@ -60,11 +60,11 @@ namespace Webscraper_ConsoleApplication
                 if (new_height == last_height) { break; }      
                 last_height = new_height;
             }
-        }
+        }*/
 
         public void waitLoaded()
         {
-            var timeout = 10000;
+            var timeout = 2000;
             var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(timeout));
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
@@ -74,12 +74,31 @@ namespace Webscraper_ConsoleApplication
             return url + searchTerm + filter;
         }
 
-       public IWebElement FindElement(By by)
+       public IWebElement FindElementClick(By by)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
             return element;
         }
+
+        public IWebElement FindElement(By by)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
+            return element;
+        }
+
+     /*   public IWebElement FindElementInParent(IWebElement parent, By by)
+        {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement element = wait.Until( parent => parent.FindElement(by));
+            Console.WriteLine("element found" + element.Text);
+            return element;
+        }*/
+
+       /* WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        IWebElement firstResult = wait.Until(e => e.FindElement(By.XPath("//a/h3")));*/
 
         public bool checkResultEmpty(ReadOnlyCollection<IWebElement> collection)
         {

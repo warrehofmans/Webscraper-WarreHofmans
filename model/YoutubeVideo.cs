@@ -7,6 +7,7 @@ namespace Webscraper_ConsoleApplication
 {
     class YoutubeVideo : IEquatable<YoutubeVideo>
     {
+        public int id { get; set; }
         public string title { get; set; }
         public string url { get; set; }
         public string uploader { get; set; }

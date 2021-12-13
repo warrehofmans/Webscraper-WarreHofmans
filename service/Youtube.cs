@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.views;
 
 namespace Webscraper_ConsoleApplication
 {
@@ -59,7 +60,7 @@ namespace Webscraper_ConsoleApplication
 
                 };
 
-                Print.printVideo(youtubeVideo, helpCounter + 1);
+                VideoOverview.printVideo(youtubeVideo, helpCounter + 1);
                youtubeVideoRepository.InsertYoutubeVideo(youtubeVideo);
 
                 helpCounter++;
