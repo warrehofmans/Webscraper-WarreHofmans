@@ -30,7 +30,7 @@ namespace Webscraper_ConsoleApplication
            
             ChromeOptions capabilities = new ChromeOptions();
             capabilities.BrowserVersion = "latest";
-            //capabilities.AddArguments("headless");
+            capabilities.AddArguments("headless");
             //capabilities.AddArguments("log-level=OFF");
             capabilities.AddExcludedArgument("disable-popup-blocking");
             Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
