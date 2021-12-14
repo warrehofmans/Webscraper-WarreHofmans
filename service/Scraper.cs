@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +35,7 @@ namespace Webscraper_ConsoleApplication
             capabilities.AddArguments("headless");
             //capabilities.AddArguments("log-level=OFF");
             capabilities.AddExcludedArgument("disable-popup-blocking");
-            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
+            Console.WriteLine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             driver = new ChromeDriver(@"./driver/", capabilities);
         }
 

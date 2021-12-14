@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Webscraper_ConsoleApplication.DAL;
 using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.service;
@@ -166,6 +168,11 @@ namespace Webscraper_ConsoleApplication
                     Console.WriteLine("Hard reset!");
                     SqlLiteBaseRepository.dbHardReset();
  
+                }
+
+                if(choice.ToLower() == "debug")
+                {
+                    Console.WriteLine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
                 }
 
 
