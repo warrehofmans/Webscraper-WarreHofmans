@@ -1,9 +1,9 @@
 name: .NET Core
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,5 +23,12 @@ jobs:
       
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      
     - name: Publish
-      run: dotnet publish
+      run: dotnet publish  -r win-x64
+      
+    - name: Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: webscraper
+          path: /home/runner/work/webscraper/webscraper/bin/Debug/netcoreapp3.1/win-x64/publish/
