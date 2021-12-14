@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Webscraper_ConsoleApplication.helpers;
+using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.service;
 
 namespace Webscraper_ConsoleApplication.views
@@ -24,6 +25,29 @@ namespace Webscraper_ConsoleApplication.views
                 count++;
             }
             FilterTranslation.initialized = true;
+        }
+
+
+        public static void printProduct(ProductItem item, int count)
+        {
+            Console.WriteLine("******* Product " + count + " *******");
+            Console.WriteLine("Title: " + item.title);
+            Console.WriteLine("Creator: " + item.creator);
+            Console.WriteLine("Price: €" + item.price);
+            Console.WriteLine("Delivery: " + item.delivery);
+            Console.WriteLine("Product url: " + item.url);
+            Console.WriteLine("\n");
+        }
+
+        public static void printProduct(ProductItem item)
+        {
+            Console.WriteLine(item.id + ")");
+            Console.WriteLine("Title: " + item.title);
+            Console.WriteLine("Creator: " + item.creator);
+            Console.WriteLine("Price: €" + item.price.Replace(" ", String.Empty));
+            Console.WriteLine("Delivery: " + item.delivery);
+            Console.WriteLine("Product url: " + item.url);
+            Console.WriteLine("\n");
         }
 
         public static void searchHeader()

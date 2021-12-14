@@ -1,14 +1,19 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Webscraper_ConsoleApplication.helpers;
+using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.views;
 
 namespace Webscraper_ConsoleApplication.service
 {
     class Product : Scraper
     {
-        private int ProductCount;
+       
+        private ReadOnlyCollection<IWebElement> products;
+        public static int amountProducts = 10;
         /*  private JobAdvRepository jobAdvRepository = new JobAdvRepository();*/
         private readonly string filterPrefix = "&view=list&sort=";
         public static readonly Dictionary<string, string> avaibleFilters = new Dictionary<string, string>()
@@ -72,6 +77,99 @@ namespace Webscraper_ConsoleApplication.service
         public void scrapePoducts()
         {
             setUrl(makeUrl());
+            waitLoaded();
+            scrollPage();
+
+            products = collectProducts();
+            if (!checkResultEmpty(products)) { Print.printNoResults(); }
+
+            //loop over results
+            var counter = 0;
+            var helpCounter = 0;
+            while (helpCounter < products.Count && helpCounter < amountProducts)
+            {
+
+                var product = products[counter];
+                counter++;
+
+                //print object
+
+                ProductItem productItem = new ProductItem
+                {
+
+                    title = getTitle(product),
+                    creator = getCreator(product),
+                    price = getPrice(product),
+                    delivery = getDelivery(product),
+                    url = getUrl(product)
+                };
+                ProductOverview.printProduct(productItem, helpCounter + 1);
+               
+                //save to database
+
+                helpCounter++;
+            }
         }
+
+        private ReadOnlyCollection<IWebElement> collectProducts()
+        {
+            var prevVids = 0;
+            do
+            {
+                scrollPage();
+                products = collectProductsPage();
+                if (products.Count == prevVids)
+                {
+                    return products;
+                }
+                prevVids = products.Count;
+            }
+            while (!checkResult());
+
+            return products;
+        }
+
+        private ReadOnlyCollection<IWebElement> collectProductsPage()
+        {
+            By element = By.CssSelector(".product-item--row");
+            return driver.FindElements(element);
+        }
+
+        private string getTitle(IWebElement product)
+        {
+            IWebElement element = product.FindElement(By.CssSelector(".product-title"));
+            return element.Text;
+        }
+
+        private string getUrl(IWebElement product)
+        {
+            IWebElement element = product.FindElement(By.CssSelector(".product-title"));
+            return element.GetAttribute("href");
+        }
+
+        private string getCreator(IWebElement product)
+        {
+            IWebElement element = product.FindElement(By.CssSelector(".product-creator"));
+            return element.Text;
+        }
+
+        private string getDelivery(IWebElement video)
+        {
+            IWebElement element = video.FindElement(By.CssSelector(".product-delivery"));
+            return element.Text;
+        }
+
+        private string getPrice(IWebElement product)
+        {
+            IWebElement element = product.FindElement(By.CssSelector(".price-block meta"));
+            return element.GetAttribute("content");
+        }
+
+        private bool checkResult()
+        {
+            return products.Count > amountProducts;
+        }
+
+
     }
 }
