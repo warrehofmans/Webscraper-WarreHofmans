@@ -63,6 +63,28 @@ namespace Webscraper_ConsoleApplication.views
         }
 
 
+        public static void printProductOverview()
+        {
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("Delete a product? - delete all: a - exit: q");
+
+        }
+
+        public static void NoProductsFound()
+        {
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("You have no products saved");
+
+        }
+
+        public static void Header(int count)
+        {
+            Console.WriteLine("You have " + count + " products saved!");
+            Console.WriteLine("-----------------------------------------------------");
+
+        }
+
+
 
     }
 }

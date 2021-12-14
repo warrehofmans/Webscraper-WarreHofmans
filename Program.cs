@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.service;
 using Webscraper_ConsoleApplication.views;
 
@@ -15,7 +16,8 @@ namespace Webscraper_ConsoleApplication
           
             YoutubeVideoRepository youtubeVideoRepository = new YoutubeVideoRepository();
             JobAdvRepository jobAdvRepository = new JobAdvRepository();
-            //HashSet<YoutubeVideo> videos = new HashSet<YoutubeVideo>(youtubeVideoRepository.GetYoutubeVideos());
+            ProductItemRepository productItemRepository = new ProductItemRepository();
+
             while (true)
             {
                 Print.StartScreen();
@@ -117,11 +119,45 @@ namespace Webscraper_ConsoleApplication
                     }
                 }
 
-                if (choice.ToLower() == "reset youtube")
+                if (choice.ToLower() == "5")
+                {
+                    ProductOverview.searchHeader();
+                    string searchTerm = Console.ReadLine();
+                    Product product = new Product(searchTerm);
+
+                    ProductOverview.printFilters();
+                    product.selectFilter(Console.ReadLine());
+                    product.scrapePoducts();
+                }
+
+                if (choice.ToLower() == "6")
                 {
 
-                    Console.WriteLine("Reset youtube!");
-                    youtubeVideoRepository.ResetYoutubeDb();
+                    var productList = productItemRepository.GetProductItems();
+
+                    if (productList.Count() == 0) { ProductOverview.NoProductsFound(); }
+                    else
+                    {
+                        ProductOverview.Header(productList.Count());
+
+                        foreach(ProductItem product in productList)
+                        {
+                            ProductOverview.printProduct(product);
+                        }
+
+                        ProductOverview.printProductOverview();
+                        var id = Console.ReadLine();
+
+                        if (id == "a")
+                        {
+                            productItemRepository.ResetProductDb();
+                        }
+                        if (id != "q" && id != "a")
+                        {
+                            productItemRepository.DeleteProduct(new ProductItem { id = Int32.Parse(id) });
+
+                        }
+                    }
                 }
 
                 if (choice.ToLower() == "reset")
@@ -133,16 +169,7 @@ namespace Webscraper_ConsoleApplication
                 }
 
 
-                if (choice.ToLower() == "10")
-                {
-                    ProductOverview.searchHeader();
-                    string searchTerm = Console.ReadLine();
-                    Product product = new Product(searchTerm);
-  
-                    ProductOverview.printFilters();
-                    product.selectFilter(Console.ReadLine());
-                    product.scrapePoducts();
-                }
+              
 
             }
             

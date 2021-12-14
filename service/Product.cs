@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Webscraper_ConsoleApplication.DAL;
 using Webscraper_ConsoleApplication.helpers;
 using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.views;
@@ -27,6 +28,8 @@ namespace Webscraper_ConsoleApplication.service
              { "ranking" , "wishListRank1" }
 
         };
+
+        private ProductItemRepository productItemRepository = new ProductItemRepository();
 
         public Product()
         {
@@ -104,9 +107,9 @@ namespace Webscraper_ConsoleApplication.service
                     url = getUrl(product)
                 };
                 ProductOverview.printProduct(productItem, helpCounter + 1);
-               
-                //save to database
 
+                //save to database
+                productItemRepository.InsertProductItem(productItem);
                 helpCounter++;
             }
         }
@@ -169,7 +172,5 @@ namespace Webscraper_ConsoleApplication.service
         {
             return products.Count > amountProducts;
         }
-
-
     }
 }

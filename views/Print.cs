@@ -8,13 +8,14 @@ namespace Webscraper_ConsoleApplication
     {
         static public void StartScreen()
         {
-            Console.WriteLine("Welcome to my webscraper :)");
             Console.WriteLine("Make your selection");
             Console.WriteLine("-------------------");
             Console.WriteLine("1 - Youtube");
             Console.WriteLine("2 - Jobs");
             Console.WriteLine("3 - Video overview");
             Console.WriteLine("4 - Job overview");
+            Console.WriteLine("5 - Product");
+            Console.WriteLine("6 - Product overview");
         }
 
         public static void printNoResults()
