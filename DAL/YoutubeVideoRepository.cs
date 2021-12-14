@@ -9,10 +9,9 @@ namespace Webscraper_ConsoleApplication.DAL
     {
         public YoutubeVideoRepository()
         {
-            if (!DatabaseExists())
-            {
+          
                 CreateVideoDatabase();
-        }
+       
     }
         public int InsertYoutubeVideo(YoutubeVideo youtubeVideo)
         {

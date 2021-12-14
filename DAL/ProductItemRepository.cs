@@ -11,10 +11,9 @@ namespace Webscraper_ConsoleApplication.DAL
 
         public ProductItemRepository()
         {
-            if (!DatabaseExists())
-            {
+          
                 CreateProductDatabase();
-            }
+            
         }
         public int InsertProductItem(ProductItem productItem)
         {

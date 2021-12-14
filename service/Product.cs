@@ -164,8 +164,16 @@ namespace Webscraper_ConsoleApplication.service
 
         private string getPrice(IWebElement product)
         {
-            IWebElement element = product.FindElement(By.CssSelector(".price-block meta"));
-            return element.GetAttribute("content");
+            try
+            {
+                IWebElement element = product.FindElement(By.CssSelector(".price-block meta"));
+                return element.GetAttribute("content");
+            }
+            catch 
+            {
+                return "*";
+            }
+           
         }
 
         private bool checkResult()

@@ -10,10 +10,9 @@ namespace Webscraper_ConsoleApplication.DAL
 
         public JobAdvRepository()
         {
-            if (!DatabaseExists())
-            {
+           
                 CreateJobDatabase();
-        }
+        
     }
         public int InsertJobAdv(JobAdv jobAdv)
         {

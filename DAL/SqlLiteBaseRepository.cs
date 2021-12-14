@@ -9,6 +9,7 @@ namespace Webscraper_ConsoleApplication.DAL
 {
     class SqlLiteBaseRepository
     {
+        private bool dbStatus;
         public SqlLiteBaseRepository()
         {
         }
@@ -42,10 +43,12 @@ namespace Webscraper_ConsoleApplication.DAL
             using (var connection = DbConnectionFactory())
             {
                 connection.Open();
-  
+                 
+               
+            
                 //create youtube table
                 connection.Execute(
-                    @"CREATE TABLE YoutubeVideo
+                    @"CREATE TABLE IF NOT EXISTS YoutubeVideo
                     (
                     Id                                 INTEGER PRIMARY KEY AUTOINCREMENT,
                     Title                              VARCHAR(50) UNIQUE,
@@ -54,7 +57,7 @@ namespace Webscraper_ConsoleApplication.DAL
                     Views                              VARCHAR(100),
                     Date                               VARCHAR(100)
                     )"
-                   ) ;
+                   );
             }
         } 
         protected static void CreateJobDatabase()
@@ -65,7 +68,7 @@ namespace Webscraper_ConsoleApplication.DAL
   
                 //create youtube table
                 connection.Execute(
-                    @"CREATE TABLE JobAdv
+                    @"CREATE TABLE IF NOT EXISTS JobAdv
                     (
                     Id                                 INTEGER PRIMARY KEY AUTOINCREMENT,
                     Title                              VARCHAR(50) UNIQUE,
@@ -85,7 +88,7 @@ namespace Webscraper_ConsoleApplication.DAL
 
                 //create youtube table
                 connection.Execute(
-                    @"CREATE TABLE ProductItem
+                    @"CREATE TABLE IF NOT EXISTS ProductItem
                     (
                     Id                                 INTEGER PRIMARY KEY AUTOINCREMENT,
                     Title                              VARCHAR(50) UNIQUE,
