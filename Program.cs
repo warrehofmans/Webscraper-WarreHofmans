@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.service;
 using Webscraper_ConsoleApplication.views;
 
 namespace Webscraper_ConsoleApplication
@@ -129,6 +130,18 @@ namespace Webscraper_ConsoleApplication
                     Console.WriteLine("Hard reset!");
                     SqlLiteBaseRepository.dbHardReset();
  
+                }
+
+
+                if (choice.ToLower() == "10")
+                {
+                    ProductOverview.searchHeader();
+                    string searchTerm = Console.ReadLine();
+                    Product product = new Product(searchTerm);
+  
+                    ProductOverview.printFilters();
+                    product.selectFilter(Console.ReadLine());
+                    product.scrapePoducts();
                 }
 
             }

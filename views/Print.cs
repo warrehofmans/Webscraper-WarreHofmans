@@ -37,6 +37,13 @@ namespace Webscraper_ConsoleApplication
             Console.Write(new string (' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
+
+
+        //DEBIG: get url
+        public static void printUrl(Scraper scraper)
+        {
+            Console.WriteLine(scraper.url);
+        }
     }
 }
 
