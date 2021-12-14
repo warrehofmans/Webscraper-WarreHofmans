@@ -7,7 +7,6 @@ namespace Webscraper_ConsoleApplication.DAL
 {
     class JobAdvRepository : SqlLiteBaseRepository
     {
-
         public JobAdvRepository()
         {
            
