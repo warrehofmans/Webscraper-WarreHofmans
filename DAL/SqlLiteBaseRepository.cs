@@ -76,5 +76,26 @@ namespace Webscraper_ConsoleApplication.DAL
                    ) ;
             }
         }
+
+        protected static void CreateProductDatabase()
+        {
+            using (var connection = DbConnectionFactory())
+            {
+                connection.Open();
+
+                //create youtube table
+                connection.Execute(
+                    @"CREATE TABLE ProductItem
+                    (
+                    Id                                 INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Title                              VARCHAR(50) UNIQUE,
+                    Url                                VARCHAR(100),
+                    Creator                            VARCHAR(100),
+                    Delivery                           VARCHAR(100),
+                    Price                              VARCHAR(100)
+                    )"
+                   );
+            }
+        }
     }
 }
