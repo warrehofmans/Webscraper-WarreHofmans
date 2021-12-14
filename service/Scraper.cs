@@ -33,7 +33,8 @@ namespace Webscraper_ConsoleApplication
             //capabilities.AddArguments("headless");
             //capabilities.AddArguments("log-level=OFF");
             capabilities.AddExcludedArgument("disable-popup-blocking");
-            driver = new ChromeDriver(@"../../../driver/", capabilities);
+            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
+            driver = new ChromeDriver(@"./driver/", capabilities);
         }
 
         public void setUrl(string url)
