@@ -47,5 +47,6 @@ namespace Webscraper_ConsoleApplication.views
            Console.WriteLine("-----------------------------------------------------");
 
         }
+        
     }
 }
