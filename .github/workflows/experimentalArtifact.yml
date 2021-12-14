@@ -25,10 +25,10 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
       
     - name: Publish
-      run: dotnet publish  -r win-x64
+      run: dotnet publish  
       
     - name: Build Artifact
       uses: actions/upload-artifact@v2
       with:
           name: ExperimentalWebscraper
-          path: /home/runner/work/webscraper/webscraper/bin/Debug/netcoreapp3.1/win-x64/publish/
+          path: /home/runner/work/webscraper/webscraper/bin/Debug/netcoreapp3.14/publish/
