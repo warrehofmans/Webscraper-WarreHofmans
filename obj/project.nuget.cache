@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "E9GFsHqQjNMwtH49sJdxVFoVV7pYRn3ylvEXwmv+fTdYIcvFu4X6ZzFsgoqaupupE/i3JnoAQ+L2otp+wHittg==",
+  "dgSpecHash": "dwxVDBeFJQjWdigH+vQnZeZNFxmLXfHvHwg4qAcY1/SapNpsbyc94T0hXnhhichoapVR/diZXSxexlwLR1pkNQ==",
   "success": true,
   "projectFilePath": "C:\\thomas more\\DevOps & Security\\case study\\Webscraper-ConsoleApplication\\Webscraper-ConsoleApplication.csproj",
   "expectedPackageFiles": [
@@ -9,9 +9,9 @@
     "C:\\Users\\warre\\.nuget\\packages\\microsoft.data.sqlite\\5.0.12\\microsoft.data.sqlite.5.0.12.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.12\\microsoft.data.sqlite.core.5.0.12.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\warre\\.nuget\\packages\\selenium.chrome.webdriver\\85.0.0\\selenium.chrome.webdriver.85.0.0.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\selenium.support\\4.1.0\\selenium.support.4.1.0.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
+    "C:\\Users\\warre\\.nuget\\packages\\selenium.webdriver.chromedriver\\96.0.4664.4500\\selenium.webdriver.chromedriver.96.0.4664.4500.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
     "C:\\Users\\warre\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",

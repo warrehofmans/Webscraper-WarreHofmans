@@ -37,7 +37,8 @@ namespace Webscraper_ConsoleApplication
             capabilities.AddExcludedArgument("disable-popup-blocking");
             Console.WriteLine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             var path = (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\driver";
-            driver = new ChromeDriver(@path, capabilities);
+            //driver = new ChromeDriver(@path, capabilities);
+            driver = new ChromeDriver(capabilities);
         }
 
         public void setUrl(string url)
