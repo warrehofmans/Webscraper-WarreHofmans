@@ -6,7 +6,11 @@ namespace Webscraper_ConsoleApplication.views
 {
     class JobOverview
     {
-
+        public static void printSearch()
+        {
+            Console.Clear();
+            Console.WriteLine("What term would you like to search job advertisements with?");
+        }
         public static void printJob(JobAdv job, int count)
         {
             Console.WriteLine("******* Job " + count + " *******");
@@ -29,6 +33,7 @@ namespace Webscraper_ConsoleApplication.views
 
         public static void printJobOverview()
         {
+        
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("Delete a job advertisement? - delete all: a - exit: q");
          
@@ -36,14 +41,15 @@ namespace Webscraper_ConsoleApplication.views
 
         public static void NoJobsFound()
         {
-            Console.WriteLine("-----------------------------------------------------");
+            Console.Clear();
             Console.WriteLine("You have no job advertisements saved");
             
         }
 
         public static void Header(int count)
         {
-           Console.WriteLine("You have " + count + " job advertisements saved!");
+            Console.Clear();
+            Console.WriteLine("You have " + count + " job advertisements saved!");
            Console.WriteLine("-----------------------------------------------------");
 
         }

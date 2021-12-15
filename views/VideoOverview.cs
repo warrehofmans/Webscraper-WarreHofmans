@@ -6,6 +6,11 @@ namespace Webscraper_ConsoleApplication.views
 {
     class VideoOverview
     {
+        public static void printSearch()
+        {
+            Console.Clear();
+            Console.WriteLine("What term would you like to search video's with?");
+        }
 
         public static void printVideo(YoutubeVideo video, int count)
         {
@@ -38,13 +43,14 @@ namespace Webscraper_ConsoleApplication.views
 
         public static void NoVideosFound()
         {
-            Console.WriteLine("-----------------------------------------------------");
+            Console.Clear();
             Console.WriteLine("You have no video statistic saved");
 
         }
 
         public static void Header(int count)
         {
+            Console.Clear();
             Console.WriteLine("You have " + count + " video statistics saved!");
             Console.WriteLine("-----------------------------------------------------");
 

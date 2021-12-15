@@ -84,7 +84,10 @@ namespace Webscraper_ConsoleApplication.service
             scrollPage();
 
             products = collectProducts();
-            if (!checkResultEmpty(products)) { Print.printNoResults(); }
+            if (!checkResultEmpty(products)) { Print.printNoResults(); } else
+            {
+                Print.printResults();
+            }
 
             //loop over results
             var counter = 0;
@@ -158,8 +161,16 @@ namespace Webscraper_ConsoleApplication.service
 
         private string getDelivery(IWebElement video)
         {
-            IWebElement element = video.FindElement(By.CssSelector(".product-delivery"));
-            return element.Text;
+            try
+            {
+                IWebElement element = video.FindElement(By.CssSelector(".product-delivery"));
+                return element.Text;
+            }
+            catch
+            {
+                return "not avaible";
+            }
+           
         }
 
         private string getPrice(IWebElement product)

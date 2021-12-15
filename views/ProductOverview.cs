@@ -33,7 +33,7 @@ namespace Webscraper_ConsoleApplication.views
             Console.WriteLine("******* Product " + count + " *******");
             Console.WriteLine("Title: " + item.title);
             Console.WriteLine("Creator: " + item.creator);
-            Console.WriteLine("Price: €" + item.price);
+            Console.WriteLine("Price: " + item.price + " Euro");
             Console.WriteLine("Delivery: " + item.delivery);
             Console.WriteLine("Product url: " + item.url);
             Console.WriteLine("\n");
@@ -72,13 +72,14 @@ namespace Webscraper_ConsoleApplication.views
 
         public static void NoProductsFound()
         {
-            Console.WriteLine("-----------------------------------------------------");
+            Console.Clear();
             Console.WriteLine("You have no products saved");
 
         }
 
         public static void Header(int count)
         {
+            Console.Clear();
             Console.WriteLine("You have " + count + " products saved!");
             Console.WriteLine("-----------------------------------------------------");
 

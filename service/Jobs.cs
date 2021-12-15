@@ -26,7 +26,7 @@ namespace Webscraper_ConsoleApplication
             this.filter = "&fromage=3";
         }
 
-        public void searchJobs()
+        public void scrapeJobs()
         {
             setUrl(makeUrl());
             collectJobs();
@@ -40,7 +40,11 @@ namespace Webscraper_ConsoleApplication
             if(!checkResultEmpty(jobs)) {
                 Print.printNoResults();
                 return;
-                }
+            }
+            else
+            {
+                Print.printResults();
+            }
             saveJobs(jobs);
             scrollPage();
            
@@ -123,7 +127,7 @@ namespace Webscraper_ConsoleApplication
                 FindElementClick(By.Id("popover-x"));
                 return true;
             }
-            catch (Exception e)
+            catch 
             {
                 return false;
             }
@@ -133,12 +137,6 @@ namespace Webscraper_ConsoleApplication
         {
             By next = By.CssSelector("[aria-label='Volgende']");
             var element = FindElementClick(next);
-
-      /*      Actions actions = new Actions(driver);
-            actions.MoveToElement(element);
-            actions.Perform();*/
-
-
             element.Click();
            
         }
@@ -150,7 +148,7 @@ namespace Webscraper_ConsoleApplication
                 FindElementClick(By.CssSelector("[aria-label='Volgende']"));
                 return true;
             }
-                catch(Exception e)
+                catch
             {
                 return false;
             }   

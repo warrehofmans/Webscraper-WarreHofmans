@@ -52,23 +52,10 @@ namespace Webscraper_ConsoleApplication
         public void scrollPage()
         {
                 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, document.documentElement.scrollHeight);");
-                //Thread.Sleep(2000);
+           
 
         }
 
-   /*     public void scrollBottom()
-        {
-
-            var last_height = (((IJavaScriptExecutor)driver).ExecuteScript("return document.documentElement.scrollHeight"));
-            while (true)
-            {
-                ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, document.documentElement.scrollHeight);");
-                Thread.Sleep(2000);   
-                var new_height = ((IJavaScriptExecutor)driver).ExecuteScript("return document.documentElement.scrollHeight");     
-                if (new_height == last_height) { break; }      
-                last_height = new_height;
-            }
-        }*/
 
         public void waitLoaded()
         {
@@ -96,17 +83,6 @@ namespace Webscraper_ConsoleApplication
             return element;
         }
 
-     /*   public IWebElement FindElementInParent(IWebElement parent, By by)
-        {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            IWebElement element = wait.Until( parent => parent.FindElement(by));
-            Console.WriteLine("element found" + element.Text);
-            return element;
-        }*/
-
-       /* WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        IWebElement firstResult = wait.Until(e => e.FindElement(By.XPath("//a/h3")));*/
 
         public bool checkResultEmpty(ReadOnlyCollection<IWebElement> collection)
         {

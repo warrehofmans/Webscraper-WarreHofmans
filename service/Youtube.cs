@@ -32,7 +32,10 @@ namespace Webscraper_ConsoleApplication
             videos = collectVideos();
 
             //check if there are results
-            if (!checkResultEmpty(videos)) { Print.printNoResults(); }
+            if (!checkResultEmpty(videos)) { Print.printNoResults(); } else
+            {
+                Print.printResults();
+            }
             
 
             //loop over results
@@ -128,7 +131,7 @@ namespace Webscraper_ConsoleApplication
                 IWebElement element = video.FindElement(By.XPath(".//*[@id='metadata-line']/span[2]"));
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

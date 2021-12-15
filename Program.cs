@@ -29,7 +29,7 @@ namespace Webscraper_ConsoleApplication
                 if (choice.ToLower() == "1")
                 {
 
-                    Console.WriteLine("Search?");
+                    VideoOverview.printSearch();
                     string searchTerm = Console.ReadLine();
                     Youtube youtube = new Youtube(searchTerm);
                     youtube.scrapeYoutube();
@@ -40,15 +40,26 @@ namespace Webscraper_ConsoleApplication
                 if (choice.ToLower() == "2")
                 {
 
-                    Console.WriteLine("Search?");
+                    JobOverview.printSearch();
                     string searchTerm = Console.ReadLine();
                     Jobs jobs = new Jobs(searchTerm);
-                    jobs.searchJobs();
+                    jobs.scrapeJobs();
 
                 }
 
-
                 if (choice.ToLower() == "3")
+                {
+                    ProductOverview.searchHeader();
+                    string searchTerm = Console.ReadLine();
+                    Product product = new Product(searchTerm);
+
+                    ProductOverview.printFilters();
+                    product.selectFilter(Console.ReadLine());
+                    product.scrapePoducts();
+                }
+
+
+                if (choice.ToLower() == "4")
                 {
 
                     var videoList = youtubeVideoRepository.GetYoutubeVideos();
@@ -79,6 +90,7 @@ namespace Webscraper_ConsoleApplication
                             {
                                 youtubeVideoRepository.DeleteVideo(new YoutubeVideo { id = Int32.Parse(id) });
                                 Print.clearPrevLine();
+                                break;
                             }
 
                             else
@@ -91,7 +103,7 @@ namespace Webscraper_ConsoleApplication
                     }
                 }
 
-                if (choice.ToLower() == "4")
+                if (choice.ToLower() == "5")
                 {
 
                     var jobList = jobAdvRepository.GetJobAdvs();
@@ -121,16 +133,7 @@ namespace Webscraper_ConsoleApplication
                     }
                 }
 
-                if (choice.ToLower() == "5")
-                {
-                    ProductOverview.searchHeader();
-                    string searchTerm = Console.ReadLine();
-                    Product product = new Product(searchTerm);
-
-                    ProductOverview.printFilters();
-                    product.selectFilter(Console.ReadLine());
-                    product.scrapePoducts();
-                }
+           
 
                 if (choice.ToLower() == "6")
                 {
