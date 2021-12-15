@@ -60,9 +60,9 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
-            "Selenium.WebDriver.ChromeDriver": {
+            "WebDriverManager": {
               "target": "Package",
-              "version": "[96.0.4664.4500, )"
+              "version": "[2.12.3, )"
             }
           },
           "imports": [

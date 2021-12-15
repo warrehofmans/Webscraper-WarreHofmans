@@ -10,6 +10,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 
 namespace Webscraper_ConsoleApplication
@@ -34,11 +36,8 @@ namespace Webscraper_ConsoleApplication
             capabilities.BrowserVersion = "latest";
             capabilities.AddArguments("headless");
             //capabilities.AddArguments("log-level=OFF");
-            capabilities.AddExcludedArgument("disable-popup-blocking");
-            Console.WriteLine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            var path = (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\driver";
-            //driver = new ChromeDriver(@path, capabilities);
-            //driver = new ChromeDriver(@path, capabilities);
+            //driver = new ChromeDriver(@"./driver/", capabilities);
+            new DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver(capabilities);
 
         
