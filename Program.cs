@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.helpers;
 using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.service;
 using Webscraper_ConsoleApplication.views;
@@ -26,6 +27,7 @@ namespace Webscraper_ConsoleApplication
 
                 var choice = Console.ReadLine();
 
+                //search a youtube video
                 if (choice.ToLower() == "1")
                 {
 
@@ -36,7 +38,7 @@ namespace Webscraper_ConsoleApplication
 
                 }
 
-
+                //search a job advertisement
                 if (choice.ToLower() == "2")
                 {
 
@@ -47,6 +49,7 @@ namespace Webscraper_ConsoleApplication
 
                 }
 
+                //search a product
                 if (choice.ToLower() == "3")
                 {
                     ProductOverview.searchHeader();
@@ -58,76 +61,87 @@ namespace Webscraper_ConsoleApplication
                     product.scrapePoducts();
                 }
 
-
+                //youtube video overview
                 if (choice.ToLower() == "4")
                 {
-
+                    //retrieve all video's
                     var videoList = youtubeVideoRepository.GetYoutubeVideos();
 
+                    //no video's saved
                     if(videoList.Count() == 0)
                     {
                         VideoOverview.NoVideosFound();
                     }
                     else
                     {
-                        VideoOverview.Header(videoList.Count());
-                        foreach (YoutubeVideo video in videoList)
-                        {
-                            VideoOverview.printVideo(video);
+                    //print video's
+                    VideoOverview.Header(videoList.Count());
+                    foreach (YoutubeVideo video in videoList)
+                    {
+                        VideoOverview.printVideo(video);
+                        Exists.addVideo(video.id);
 
-                        }
+                    }
 
-                        VideoOverview.printVideoOverview();
-                        var id = Console.ReadLine();
+                    //print menu for deleting
+                    VideoOverview.printVideoOverview();
 
-                        if (id == "a")
-                        {
-                            youtubeVideoRepository.ResetYoutubeDb();
-                        }
-                        while (id != "q" && id != "a")
-                        {
-                            if(int.TryParse(id, out _) && id != null)
-                            {
-                                youtubeVideoRepository.DeleteVideo(new YoutubeVideo { id = Int32.Parse(id) });
-                                Print.clearPrevLine();
-                                break;
-                            }
+                    //get and validate input
+                    var input = validateInput.validateVideoInput();
 
-                            else
-                            {
-                                Print.wrongFormat();
-                                
-                            }
-                            id = Console.ReadLine();
-                        }
+                    //valide number ==> delete video
+                    if(validateInput.checkId(input))
+                    {
+                        youtubeVideoRepository.DeleteVideo(new YoutubeVideo { id = Int32.Parse(input) });
+                        Exists.removeProduct(Int32.Parse(input));
+                      
+                    }
+
+                    //Delete all
+                        if(input == "a")
+                    {
+                    youtubeVideoRepository.ResetYoutubeDb();
+                    Exists.clearVideos();
+                    }
                     }
                 }
 
+
+                //job advertisement overview
                 if (choice.ToLower() == "5")
                 {
-
+                    // retrieve all job adc
                     var jobList = jobAdvRepository.GetJobAdvs();
 
+                    //no saved jobs
                     if (jobList.Count() == 0) { JobOverview.NoJobsFound(); }
                     else
                     {
+                        //print saved job advertisements
                         JobOverview.Header(jobList.Count());
 
                         foreach (JobAdv job in jobList)
                         {
                             JobOverview.printJob(job);
+                            Exists.addJob(job.id);
                         }
 
                         JobOverview.printJobOverview();
-                        var id = Console.ReadLine();
 
-                        if (id == "a")
+                        var input = validateInput.validateJobInput();
+
+                        //Delete all
+                        if (input == "a")
                         {
                             jobAdvRepository.ResetJobDb();
+                            Exists.clearJobs();
                         }
-                        if (id != "q" && id != "a")
+
+                        //valide number ==> delete video
+                        if (validateInput.checkId(input))
                         {
-                            jobAdvRepository.DeleteJob(new JobAdv { id = Int32.Parse(id) });
+                            jobAdvRepository.DeleteJob(new JobAdv { id = Int32.Parse(input) });
+                            Exists.removeJob(Int32.Parse(input));
 
                         }
                     }
@@ -137,29 +151,37 @@ namespace Webscraper_ConsoleApplication
 
                 if (choice.ToLower() == "6")
                 {
-
+                    //retrieve all saved products
                     var productList = productItemRepository.GetProductItems();
 
+                    //no results
                     if (productList.Count() == 0) { ProductOverview.NoProductsFound(); }
                     else
                     {
+                        //print saved products
                         ProductOverview.Header(productList.Count());
 
                         foreach(ProductItem product in productList)
                         {
                             ProductOverview.printProduct(product);
+                            Exists.addProduct(product.id);
                         }
 
                         ProductOverview.printProductOverview();
-                        var id = Console.ReadLine();
+                        var input = validateInput.validateProductInput();
 
-                        if (id == "a")
+                        //Delete all products
+                        if (input == "a")
                         {
                             productItemRepository.ResetProductDb();
+                            Exists.clearProducts();
                         }
-                        if (id != "q" && id != "a")
+
+                        //valide number ==> delete video
+                        if (validateInput.checkId(input))
                         {
-                            productItemRepository.DeleteProduct(new ProductItem { id = Int32.Parse(id) });
+                            productItemRepository.DeleteProduct(new ProductItem { id = Int32.Parse(input) });
+                            Exists.removeProduct(Int32.Parse(input));
 
                         }
                     }

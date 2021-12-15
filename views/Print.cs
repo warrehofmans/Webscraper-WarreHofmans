@@ -40,6 +40,12 @@ namespace Webscraper_ConsoleApplication
             Console.WriteLine("The input is the wrong format - try again");
         }
 
+        public static void notExist()
+        {
+            clearPrevLine();
+            Console.WriteLine("The given id doesn't match a saved item - try again");
+        }
+
         public static void clearPrevLine()
         {
             int currentLineCursor = Console.CursorTop;
@@ -47,6 +53,8 @@ namespace Webscraper_ConsoleApplication
             Console.Write(new string (' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
+
+
 
     }
 }
