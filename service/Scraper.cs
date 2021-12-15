@@ -36,7 +36,7 @@ namespace Webscraper_ConsoleApplication
             //capabilities.AddArguments("log-level=OFF");
             capabilities.AddExcludedArgument("disable-popup-blocking");
             Console.WriteLine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            var path = (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/driver";
+            var path = (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\driver";
             driver = new ChromeDriver(@path, capabilities);
         }
 
