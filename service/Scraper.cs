@@ -38,7 +38,7 @@ namespace Webscraper_ConsoleApplication
             Console.WriteLine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             var path = (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\driver";
             //driver = new ChromeDriver(@path, capabilities);
-            driver = new ChromeDriver(capabilities);
+            driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),capabilities);
         }
 
         public void setUrl(string url)
