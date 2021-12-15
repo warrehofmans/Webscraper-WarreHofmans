@@ -39,7 +39,7 @@ namespace Webscraper_ConsoleApplication
             var path = (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\driver";
             //driver = new ChromeDriver(@path, capabilities);
             //driver = new ChromeDriver(@path, capabilities);
-            driver = new ChromeDriver(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), capabilities);
+            driver = new ChromeDriver(".",capabilities);
 
         
 
