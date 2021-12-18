@@ -14,44 +14,34 @@ namespace Webscraper_ConsoleApplication.DAL
         {
         }
 
-  
+        /*MAke connection database*/
         public static SqliteConnection DbConnectionFactory()
         {
             return new SqliteConnection(@"DataSource=ScraperDB.sqlite");
         }
 
-        public static void dbHardReset()
-        {
-            string sql = "DROP TABLE JobAdv;";
-
-            using (var connection = DbConnectionFactory())
-            {
-                connection.Open();
-                connection.Execute(sql);
-            }
-            
-        }
-
+        /*Check if database existst*/
         protected static bool DatabaseExists()
         {
-           
+           /*check if the file exists*/
             return File.Exists(@"ScraperDB.sqlite");
         }
 
+        /*Create the video table in database if not exists*/
         protected static void CreateVideoDatabase()
         {
+            /*Use the db connection*/
             using (var connection = DbConnectionFactory())
             {
-                connection.Open();
-                 
-               
-            
-                //create youtube table
+                connection.Open(); //open connection
+
+                /*execute create video table sql query*/
                 connection.Execute(
                     @"CREATE TABLE IF NOT EXISTS YoutubeVideo
                     (
                     Id                                 INTEGER PRIMARY KEY AUTOINCREMENT,
                     Title                              VARCHAR(50) UNIQUE,
+                    Type                               VARCHAR(50),
                     Url                                VARCHAR(100),
                     Uploader                           VARCHAR(100),
                     Views                              VARCHAR(100),
@@ -59,14 +49,17 @@ namespace Webscraper_ConsoleApplication.DAL
                     )"
                    );
             }
-        } 
+        }
+
+        /*Create the job table in database if not exists*/
         protected static void CreateJobDatabase()
         {
+            /*Use the db connection*/
             using (var connection = DbConnectionFactory())
             {
-                connection.Open();
-  
-                //create youtube table
+                connection.Open(); //open connection
+
+                /*execute create job table sql query*/
                 connection.Execute(
                     @"CREATE TABLE IF NOT EXISTS JobAdv
                     (
@@ -80,13 +73,15 @@ namespace Webscraper_ConsoleApplication.DAL
             }
         }
 
+        /*Create the product table in database if not exists*/
         protected static void CreateProductDatabase()
         {
+            /*Use the db connection*/
             using (var connection = DbConnectionFactory())
             {
-                connection.Open();
+                connection.Open();  //open connection
 
-                //create youtube table
+                /*execute create product table sql query*/
                 connection.Execute(
                     @"CREATE TABLE IF NOT EXISTS ProductItem
                     (

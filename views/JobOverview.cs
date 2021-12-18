@@ -6,11 +6,14 @@ namespace Webscraper_ConsoleApplication.views
 {
     class JobOverview
     {
+        /*Print: search header*/
         public static void printSearch()
         {
             Console.Clear();
             Console.WriteLine("What term would you like to search job advertisements with?");
         }
+
+        /*Print: job - in search*/
         public static void printJob(JobAdv job, int count)
         {
             Console.WriteLine("******* Job " + count + " *******");
@@ -21,6 +24,7 @@ namespace Webscraper_ConsoleApplication.views
             Console.WriteLine("\n");
         }
 
+        /*Print: job - in overview*/
         public static void printJob(JobAdv job)
         {
             Console.WriteLine(job.id + ")");
@@ -31,6 +35,7 @@ namespace Webscraper_ConsoleApplication.views
             Console.WriteLine("\n");
         }
 
+        /*Print: job overview menu*/
         public static void printJobOverview()
         {
         
@@ -39,6 +44,7 @@ namespace Webscraper_ConsoleApplication.views
          
         }
 
+        /*Print: no job founds*/
         public static void NoJobsFound()
         {
             Console.Clear();
@@ -46,6 +52,7 @@ namespace Webscraper_ConsoleApplication.views
             
         }
 
+        /*Print: overview job header*/
         public static void Header(int count)
         {
             Console.Clear();

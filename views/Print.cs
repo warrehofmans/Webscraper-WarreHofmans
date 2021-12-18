@@ -6,9 +6,10 @@ namespace Webscraper_ConsoleApplication
 {
     class Print
     {
+        /*Print: selection menu*/
         static public void StartScreen()
         {
-            //**/Console.Clear();
+            
             Console.WriteLine("Make your selection");
             Console.WriteLine("-------------------");
             Console.WriteLine("1 - Search Youtube video's");
@@ -19,11 +20,20 @@ namespace Webscraper_ConsoleApplication
             Console.WriteLine("6 - Product overview");
         }
 
+        /*Print: no results found*/
         public static void printNoResults()
         {
             Console.Clear();
             Console.WriteLine("No results found...");
             Console.WriteLine("\n");
+        }
+
+        /*Print: wrong choice*/
+        public static void wrongChoice()
+        {
+            clearPrevLine();
+            Console.WriteLine("Choose one of the above options");
+           
         }
 
 

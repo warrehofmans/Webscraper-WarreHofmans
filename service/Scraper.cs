@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -18,10 +11,11 @@ namespace Webscraper_ConsoleApplication
 {
     class Scraper
     {
-        public IWebDriver driver { get; set; }
-        public string url { get; set; }
-        public string filter { get; set; }
-        public string searchTerm { get; set; }
+
+        protected IWebDriver driver { get; set; }
+        protected string url { get; set; }
+        protected string filter { get; set; }
+        protected string searchTerm { get; set; }
 
        
         public Scraper()
@@ -29,62 +23,104 @@ namespace Webscraper_ConsoleApplication
 
             InitBrowser();
         }
-        public void InitBrowser()
+        private void InitBrowser()
         {
            
+            /*Initialize chrome options*/
             ChromeOptions capabilities = new ChromeOptions();
+            /*Most recent browser*/
             capabilities.BrowserVersion = "latest";
+            /*Don't open browser window ==> stay background*/
             capabilities.AddArguments("headless");
+            /*Disable log and warning messages*/
             //capabilities.AddArguments("log-level=OFF");
-            //driver = new ChromeDriver(@"./driver/", capabilities);
+        
+            /*Prepare chrome driver with driver manager*/
             new DriverManager().SetUpDriver(new ChromeConfig());
+            /*Setup the chrome driver with options*/
             driver = new ChromeDriver(capabilities);
 
         
 
         }
 
-        public void setUrl(string url)
+        /*Set url of webdriver*/
+        protected void setUrl(string url)
         {
+            /*Navigate to url*/
             driver.Navigate().GoToUrl(url);
         }
 
-        public void scrollPage()
+        /*Scrol down on page*/
+        protected void scrollPage()
         {
+            /*Scroll on page with javascript
+             * scroll one window down
+             */
                 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, document.documentElement.scrollHeight);");
            
 
         }
 
-
-        public void waitLoaded()
+        /*Wait until page is loaded*/
+        protected void waitLoaded()
         {
+            /*Timout after */
             var timeout = 2000;
+            /*Setup driver wait with timeout*/
             var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(timeout));
+            /*Wait until document state is ready
+             * get document state with javascript
+             * check if complete
+             */
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
 
-        public string makeUrl()
+        /*Compose the urel for the driver with:
+         * setup url
+         * user's searchTrem
+         * filter
+         */
+        protected string makeUrl()
         {
             return url + searchTerm + filter;
         }
 
-       public IWebElement FindElementClick(By by)
+        /*Find element and wait until it's clickable*/
+        protected IWebElement FindElementClick(By by)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            /*Timpout after in seconds*/
+            var timeout = 10;
+            /*Setup wait with timeout*/
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            /*Wait untile element is found and clickable
+             * user selenium helpers to check condition
+             * condition: clickable
+             */
             IWebElement element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
             return element;
         }
 
-        public IWebElement FindElement(By by)
+        /*Find element and wait until visible*/
+        protected IWebElement FindElement(By by)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            /*Timpout after in seconds*/
+            var timeout = 10;
+            /*Setup wait with timeout*/
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            /*Wait untile element is found and clickable
+              * user selenium helpers to check condition
+              * condition: visible
+            */
             IWebElement element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
             return element;
         }
 
-
-        public bool checkResultEmpty(ReadOnlyCollection<IWebElement> collection)
+        /*Check if result is empty
+         *empty: false
+         *not empty: true
+         */
+        protected bool checkResultEmpty(ReadOnlyCollection<IWebElement> collection)
         {
             return collection.Count > 0;
         }
