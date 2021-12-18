@@ -9,7 +9,6 @@ namespace Webscraper_ConsoleApplication.DAL
 {
     class SqlLiteBaseRepository
     {
-        private bool dbStatus;
         public SqlLiteBaseRepository()
         {
         }

@@ -33,14 +33,21 @@ namespace Webscraper_ConsoleApplication
             /*Don't open browser window ==> stay background*/
             capabilities.AddArguments("headless");
             /*Disable log and warning messages*/
-            //capabilities.AddArguments("log-level=OFF");
-        
+            capabilities.AddExcludedArgument("enable-logging");
+           
             /*Prepare chrome driver with driver manager*/
             new DriverManager().SetUpDriver(new ChromeConfig());
             /*Setup the chrome driver with options*/
-            driver = new ChromeDriver(capabilities);
 
-        
+            /*Create service for the chrome driver*/
+            ChromeDriverService service = ChromeDriverService.CreateDefaultService();
+            /*Disable all options that will give output to our program*/
+            service.EnableVerboseLogging = false;
+            service.SuppressInitialDiagnosticInformation = true;
+            service.HideCommandPromptWindow = true;
+
+            /*Create chrome driver with service and options*/
+            driver = new ChromeDriver(service, capabilities);
 
         }
 

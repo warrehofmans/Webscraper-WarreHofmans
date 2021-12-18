@@ -14,7 +14,7 @@ namespace Webscraper_ConsoleApplication
     class Youtube : Scraper
     {
         private ReadOnlyCollection<IWebElement> videos;
-        public static int amountVideos = 50;
+        public static int amountVideos = 10;
         private  YoutubeVideoRepository youtubeVideoRepository = new YoutubeVideoRepository();
 
         /*contructor

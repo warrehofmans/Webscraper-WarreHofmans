@@ -16,7 +16,7 @@ namespace Webscraper_ConsoleApplication
             Console.WriteLine("2 - Search job advertisements");
             Console.WriteLine("3 - Search products");
             Console.WriteLine("4 - Video overview");
-            Console.WriteLine("4 - Job overview");
+            Console.WriteLine("5 - Job overview");
             Console.WriteLine("6 - Product overview");
         }
 
@@ -36,7 +36,7 @@ namespace Webscraper_ConsoleApplication
            
         }
 
-
+        /*Print: resulst*/
         public static void printResults()
         {
             Console.Clear();
@@ -44,18 +44,21 @@ namespace Webscraper_ConsoleApplication
             Console.WriteLine("-------");
         }
 
+        /*Print: wrong format*/
         public static void wrongFormat()
         {
             clearPrevLine();
             Console.WriteLine("The input is the wrong format - try again");
         }
 
+        /*Print: does not exists*/
         public static void notExist()
         {
             clearPrevLine();
             Console.WriteLine("The given id doesn't match a saved item - try again");
         }
 
+        /*Clear previous line*/
         public static void clearPrevLine()
         {
             int currentLineCursor = Console.CursorTop;
