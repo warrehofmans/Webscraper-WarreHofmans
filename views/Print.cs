@@ -12,7 +12,7 @@ namespace Webscraper_ConsoleApplication
             
             Console.WriteLine("Make your selection");
             Console.WriteLine("-------------------");
-            Console.WriteLine("1 - Search Youtube video's");
+            Console.WriteLine("1 - Search Youtube vides");
             Console.WriteLine("2 - Search job advertisements");
             Console.WriteLine("3 - Search products");
             Console.WriteLine("4 - Video overview");
