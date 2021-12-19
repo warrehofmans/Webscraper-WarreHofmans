@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading;
 using Webscraper_ConsoleApplication.DAL;
+using Webscraper_ConsoleApplication.model;
 using Webscraper_ConsoleApplication.views;
 
 namespace Webscraper_ConsoleApplication
@@ -12,132 +14,198 @@ namespace Webscraper_ConsoleApplication
     class Youtube : Scraper
     {
         private ReadOnlyCollection<IWebElement> videos;
-        public static int amountVideos = 5;
+        public static int amountVideos = 10;
         private  YoutubeVideoRepository youtubeVideoRepository = new YoutubeVideoRepository();
-        
+
+        /*contructor
+      * set searchterm (user input)
+      * base url
+      * base filter
+      */
         public Youtube(string searchTerm)
         {
             this.searchTerm = searchTerm;
             this.url = "https://www.youtube.com/results?search_query=";
             this.filter = "&sp=CAI%253D";
-            }
+           
+        }
 
+        /*Main function*/
         public void scrapeYoutube()
         {
+            /*Make url + go to url*/
             setUrl(makeUrl());
+            /*Wait until page is loaded*/
             waitLoaded();
+            /*Scroll page*/
             scrollPage();
 
-            //select all video's
-            videos = collectVideos();
+            /*Collect videos*/
+            //videos = collectVideos();
+            collectVideos();
 
-            //check if there are results
-            if (!checkResultEmpty(videos)) { Print.printNoResults(); }
+            /*check if there are results*/
+            if (!checkResultEmpty(videos)) {
+                /*Video's found!*/
+                Print.printNoResults(); } else
+            {
+                /*Video's found!*/
+               /* Print.printResults();*/
+            }
             
 
-            //loop over results
-            var counter = 0;
-            var helpCounter = 0;
-            while (helpCounter < videos.Count && helpCounter < amountVideos)
+            /*loop found video's*/
+            var counter = 0; //index videos list 
+            while (counter < videos.Count && counter < amountVideos)
             {
-                            
+               /*Get video from list*/     
                 var video = videos[counter];
-                counter++;
-
-                if (!checkStream(video))
-                {
-                    continue; 
-                }
-
-                //print object
+      
+                /*Make new youtubevideo object*/
                 YoutubeVideo youtubeVideo = new YoutubeVideo
                 {
                     title = getTitle(video),
                     url = getUrl(video),
                     uploader = getUploader(video),
-                    views = getViews(video),
-                    date = getDate(video)
-
                 };
 
-                VideoOverview.printVideo(youtubeVideo, helpCounter + 1);
-               youtubeVideoRepository.InsertYoutubeVideo(youtubeVideo);
+                /*Check if video is stream
+                 * stream:
+                 *     - no date
+                 *     - no views
+                */
+                if (checkStream(video))
+                {
+                    /*Normal video
+                     *add:
+                     *  - date
+                     *  - views
+                     *  - type: video
+                     */
+                    youtubeVideo.views = getViews(video);
+                    youtubeVideo.date = getDate(video);
+                    youtubeVideo.type = VideoType.video;
+                }
+                else
+                {
+                    /*Stream
+                    *add:
+                    *  - type: stream
+                    */
+                    youtubeVideo.type = VideoType.stream;
+                }
 
-                helpCounter++;
+                /*Print video*/
+                VideoOverview.printVideo(youtubeVideo, counter + 1);
+                /*Save video to database*/
+                youtubeVideoRepository.InsertYoutubeVideo(youtubeVideo);
+
+                /*Increase counter*/
+                counter++;
             }
         }
 
+        /*Collect video elemetns from page*/
         private ReadOnlyCollection<IWebElement> collectVideos()
         {
-            var prevVids = 0;
+            /*Helper var to prevent stuck in infinite loop
+             *  keep track of previous lenght
+             *  if previous lenght == current lenght: collected all videos
+            */
+            int prevVids = 0;
             do
             {
-                scrollPage();
-                videos = collectVideosPage();
-                if (videos.Count == prevVids)
+                /*If list is initialized*/
+                if(videos != null)
                 {
-                    return videos;
+                    /*Set previous lenght*/
+                    prevVids = videos.Count;
                 }
-                prevVids = videos.Count;
+                /*Collect video elements*/
+                videos = collectVideosPage();
+                /*Scroll down*/
+                scrollPage();
+                /*Wait until new video's are loaded*/
+                Thread.Sleep(1500);
             }
-            while (!checkResult());
-           
-           return videos;
+            /*stop loop:
+             *   - amount of wanted videos reached
+             *    *   - no videos left
+            */
+            while (videos.Count < amountVideos  && prevVids != videos.Count);
+
+            return videos;
         }
 
+        /*Collect video elements*/
         private ReadOnlyCollection<IWebElement> collectVideosPage()
         {
+            /*selector*/
             By element = By.CssSelector("ytd-video-renderer");
+            /*Search elements*/
             return driver.FindElements(element);
         }
 
+        /*Get title in video element*/
         private string getTitle(IWebElement video)
         {
+            /*Search title in video element*/
             IWebElement element = video.FindElement(By.CssSelector("#video-title"));
+            /*Get text of found element*/
             return element.Text;
         }
-
+        /*Get url in video element*/
         private string getUrl(IWebElement video)
         {
+            /*Search url in video element*/
             IWebElement element = video.FindElement(By.CssSelector("#thumbnail"));
-           return element.GetAttribute("href");
+            /*Get href attribute which contains the url of found element*/
+            return element.GetAttribute("href");
         }
-
+        /*Get views in video element*/
         private string getViews(IWebElement video)
         {
+            /*Search views in video element*/
             IWebElement element = video.FindElement(By.XPath(".//*[@id='metadata-line']/span[1]"));
+            /*Get text of found element*/
             return element.Text;
         }
-
+        /*Get title in date element*/
         private string getDate(IWebElement video)
         {
+            /*Search date in video element*/
             IWebElement element = video.FindElement(By.XPath(".//*[@id='metadata-line']/span[2]"));
+            /*Get text of found element*/
             return element.Text;
         }
-
+        /*Get uploader in video element*/
         private string getUploader(IWebElement video)
         {
+            /*Search uploader in video element*/
             IWebElement element = video.FindElement(By.XPath(".//*[@id='channel-name']/div/div/yt-formatted-string/a"));
+            /*Get attribute textContent of found element*/
             return element.GetAttribute("textContent");
         }
 
+        /*Check if element is a stream of video*/
         private bool checkStream(IWebElement video)
         {
+            /*Try find date
+              *succes: video 
+              *error: stream
+            */
             try
             {
+                /*Try find date in element*/
                 IWebElement element = video.FindElement(By.XPath(".//*[@id='metadata-line']/span[2]"));
+                /*date found! ==> video*/
                 return true;
             }
-            catch (Exception e)
+            catch
             {
+                /*Date not found! ==> stream*/
                 return false;
             }
         }
-
-        private bool checkResult()
-        {
-            return videos.Count > amountVideos;
-        }
-
     }
 }

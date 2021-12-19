@@ -6,7 +6,6 @@ namespace Webscraper_ConsoleApplication
 {
     class JobAdv { 
 
-
         public int id { get; set; }
         public string title { get; set; }
         public string company { get; set; }
